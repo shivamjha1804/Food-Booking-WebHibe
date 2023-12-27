@@ -14,8 +14,17 @@ const AuthStack = () => {
                 headerShown: false,
             }}
         >
-            {/* <Stack.Screen name="SignIn" component={SignIn} /> */}
-            <Stack.Screen name="Slider" component={Slider}/>
+
+
+            <Stack.Screen
+                name="Slider"
+                component={Slider}
+            />
+
+            <Stack.Screen
+                name="SignIn"
+                component={SignIn}
+            />
         </Stack.Navigator>
     );
 };
