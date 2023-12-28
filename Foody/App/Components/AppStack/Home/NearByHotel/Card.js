@@ -1,74 +1,107 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
+import { Icon } from 'react-native-basic-elements'
 
-const Card = ({item}) => {
+
+const Card = ({item, ...props}) => {
+    const [active, setActive] = useState(false)
     return (
-        <View 
-            style={styles.Container}
+        <TouchableOpacity
+            onPress={() => {
+                if(props.onPress){
+                    props.onPress()
+                }
+            }}
         >
             <View
-                style={styles.Row1}
+                style={styles.Container}
             >
-                <Image
-                    source={item.Image}
-                />
-            </View>
-            <View
-                style={styles.Row2}
-            >
-                <TouchableOpacity>
-                    <View
+                <View
+                    style={styles.Row1}
+                >
+                    <Image
+                        source={item.Image}
+                    />
+                </View>
+                <View
+                    style={styles.Row2}
+                >
+                    <TouchableOpacity
+                        style={styles.HeartContainer}
+                        onPress={() => {
+                            setActive(!active)
+                        }}
+                    >
+
+                        <Icon
+                            name='heart'
+                            type='AntDesign'
+                            size={17}
+                            style={{
+                                color: active ? 'red' : 'grey',
+                            }}
+                        />
+                        {/* <View
                         style={styles.HeartContainer}
                     >
                         <Image
                             style={styles.Heart}
                             source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/heart.png")}
                         />
-                    </View>
-                </TouchableOpacity>
-            </View>
-            <View
-                style={styles.Row3}
-            >
-                <Text
-                    style={styles.Title}
+
+                        <Image
+                            
+                            style={[styles.RedHeart,{
+                                opacity:active ? 1:0
+                            }]}
+                            source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/redHeart.png")}
+                        />
+                    </View> */}
+                    </TouchableOpacity>
+                </View>
+                <View
+                    style={styles.Row3}
                 >
-                    {item.Title}
-                </Text>
-            </View>
-            <View
-                style={styles.Row4}
-            >
-                <Image
-                    style={styles.Icon}
-                    source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/location.png")}
-                />
-                <Text
-                    style={styles.Text}
+                    <Text
+                        style={styles.Title}
+                    >
+                        {item.Title}
+                    </Text>
+                </View>
+                <View
+                    style={styles.Row4}
                 >
-                    {item.Location}
-                </Text>
-            </View>
-            <View
-                style={styles.Row5}
-            >
-                <Image
-                    style={styles.Icon}
-                    source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/star.png")}
-                />
-                <Text
-                    style={styles.Text}
+                    <Image
+                        style={styles.Icon}
+                        source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/location.png")}
+                    />
+                    <Text
+                        style={styles.Text}
+                    >
+                        {item.Location}
+                    </Text>
+                </View>
+                <View
+                    style={styles.Row5}
                 >
-                    {item.Rating}
-                </Text>
+                    <Image
+                        style={styles.Icon}
+                        source={require("../../../../Assets/Image/AppStack/Home/NearByHotel/star.png")}
+                    />
+                    <Text
+                        style={styles.Text}
+                    >
+                        {item.Rating}
+                    </Text>
+                </View>
             </View>
-        </View>
+        </TouchableOpacity>
     )
 }
 
 const styles = StyleSheet.create({
-    Container:{
-        marginLeft:12
+    Container: {
+        marginLeft: 12
     },
 
     HeartContainer: {
@@ -83,10 +116,17 @@ const styles = StyleSheet.create({
 
     },
 
-    Heart: {
-        height: 15,
-        width: 15
-    },
+    // Heart: {
+    //     height: 15,
+    //     width: 15
+    // },
+
+    // RedHeart: {
+    //     height: 25,
+    //     width: 25,
+    //     position: 'absolute',
+    //     opacity: 0
+    // },
 
     Title: {
         color: "#000",
@@ -99,7 +139,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         columnGap: 10,
         alignItems: 'center',
-        paddingBottom:5
+        paddingBottom: 5
     },
 
     Row5: {

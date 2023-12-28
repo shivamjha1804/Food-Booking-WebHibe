@@ -7,10 +7,13 @@ const Button = (props) => {
     return (
         <View>
             <TouchableOpacity style={{...styles.Button, backgroundColor:`${props.buttonColor}`, }} 
-            onPress={() => {
-                // navigation.navigate(`${props.page}`)
-                props.onPress()
-            }}>
+                onPress={() => {
+                    // navigation.navigate(`${props.page}`)
+                    if(props.onPress){
+                        props.onPress()
+                    }
+                }}
+            >
                 <Text style={styles.ButtonText}>
                     {props.text}
                 </Text>

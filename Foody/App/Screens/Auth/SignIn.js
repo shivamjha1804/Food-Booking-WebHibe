@@ -1,70 +1,125 @@
-import { Image, ImageBackground, StyleSheet, Text, View } from 'react-native'
+import { Image, ImageBackground, ScrollView, StatusBar, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Input from '../../Components/AuthStack/SignInComponent/Input'
 import Button from '../../Components/CommonComponents/Button/Button'
 import PreButton from '../../Components/AuthStack/SignInComponent/PreButton'
 import { useDispatch } from 'react-redux'
 import { setUser } from '../../Redux/reducer/User'
+import ReactNativeModal from 'react-native-modal'
+import { useState } from 'react'
 
 
 const SignIn = () => {
     const dispatch = useDispatch();
+    const [isModalVisible, setModalVisible] = useState(false);
+
+    const toggleModal = () => {
+        setModalVisible(!isModalVisible);
+    };
+
+    const onBackdropPress = () => {
+        setModalVisible(false)
+    }
+
     return (
         <ImageBackground source={require("../../Assets/Image/AuthStack/SignIn/backgroundImage.png")} style={{ flex: 1 }}>
-            <View style={styles.Container}>
-                <View style={styles.Row1}>
-                </View>
-                <View style={styles.Row2}>
-                    <View style={styles.Circle}>
-                        <Image source={require("../../Assets/Image/AuthStack/SignIn/crossIcon.png")} />
+            <StatusBar
+                backgroundColor={'transparent'}
+                translucent
+            />
+            <ReactNativeModal
+                isVisible={isModalVisible}
+                style={{
+                    marginHorizontal:0,
+                    marginBottom:0,
+                }}
+                
+            >
+                <ScrollView>
+                <View style={styles.Container}>
+                    <View style={styles.Row1}>
+                    </View>
+                    <View style={styles.Row2}>
+                        <TouchableOpacity
+                            onPress={() => {
+                                onBackdropPress()
+                            }}
+                        >
+                            <View style={styles.Circle}>
+                                <Image source={require("../../Assets/Image/AuthStack/SignIn/crossIcon.png")} />
+                            </View>
+                        </TouchableOpacity>
+                    </View>
+                    <View style={styles.Row3}>
+                        <Text style={styles.Label}>
+                            Get Started with Lobster
+                        </Text>
+                    </View>
+                    <View style={styles.Row4}>
+                        <Text style={styles.Row4Col1}>
+                            Don’t have an account?
+                        </Text>
+                        <Text style={styles.Row4Col2}>
+                            Signup Now
+                        </Text>
+                    </View>
+                    <View style={styles.Row5}>
+                        <Input placeholder={"Email or Phone Number"} secureTextEntry={false} Icon={""} />
+                    </View>
+                    <View style={styles.Row6}>
+                        <Input placeholder={"Enter Password"} secureTextEntry={true} Icon={"eye"} />
+                    </View>
+                    <View style={styles.Row7}>
+                        <Text style={styles.Row7Col1}>
+                            Forget Password ?
+                        </Text>
+                    </View>
+                    <View style={styles.Row8}>
+                        <Button
+                            onPress={() => {
+                                dispatch(setUser({}))
+                            }}
+                            buttonColor={"#FE724C"}
+                            text={"Log In"}
+                        />
+                    </View>
+                    <View style={styles.Row9}>
+                        <Text style={styles.Row9Col1}>
+                            or Continue
+                        </Text>
+                    </View>
+                    <View style={styles.Row10}>
+                        <PreButton buttonColor={"#1877F2"} color={"white"} text={"Continue with Facebook"} image={require("../../Assets/Image/AuthStack/SignIn/facebook.png")} />
+                    </View>
+                    <View style={styles.Row11}>
+                        <PreButton buttonColor={"white"} color={"grey"} text={"Continue with Google"} image={require("../../Assets/Image/AuthStack/SignIn/google.png")} />
+                    </View>
+                    <View style={styles.Row12}>
+                        <PreButton buttonColor={"#323643"} color={"white"} text={"Continue with Apple"} image={require("../../Assets/Image/AuthStack/SignIn/apple.png")} />
                     </View>
                 </View>
-                <View style={styles.Row3}>
-                    <Text style={styles.Label}>
-                        Get Started with Lobster
-                    </Text>
-                </View>
-                <View style={styles.Row4}>
-                    <Text style={styles.Row4Col1}>
-                        Don’t have an account?
-                    </Text>
-                    <Text style={styles.Row4Col2}>
-                        Signup Now
-                    </Text>
-                </View>
-                <View style={styles.Row5}>
-                    <Input placeholder={"Email or Phone Number"} secureTextEntry={false} Icon={""} />
-                </View>
-                <View style={styles.Row6}>
-                    <Input placeholder={"Enter Password"} secureTextEntry={true} Icon={"eye"} />
-                </View>
-                <View style={styles.Row7}>
-                    <Text style={styles.Row7Col1}>
-                        Forget Password ?
-                    </Text>
-                </View>
-                <View style={styles.Row8}>
+                </ScrollView>
+            </ReactNativeModal>
+
+            <View
+                style={styles.ButtonContainer}
+            >
+                <View>
                     <Button
-                        onPress={() => {
-                            dispatch(setUser({}))
-                        }}
                         buttonColor={"#FE724C"}
-                        text={"Log In"}
+                        text={"SignUp"}
                     />
                 </View>
-                <View style={styles.Row9}>
-                    <Text style={styles.Row9Col1}>
-                        or Continue
-                    </Text>
+                <View>
+                    <Button
+                        buttonColor={"#FE724C"}
+                        text={"SignIn"}
+
+                        onPress={() => {
+                             toggleModal()
+                        }}
+                    />
                 </View>
-                <View style={styles.Row10}>
-                    <PreButton buttonColor={"#1877F2"} color={"white"} text={"Continue with Facebook"} image={require("../../Assets/Image/AuthStack/SignIn/facebook.png")} />
-                </View>
-                <View style={styles.Row11}>
-                    <PreButton buttonColor={"white"} color={"grey"} text={"Continue with Google"} image={require("../../Assets/Image/AuthStack/SignIn/google.png")} />
-                </View>
-                <View style={styles.Row12}>
-                    <PreButton buttonColor={"#323643"} color={"white"} text={"Continue with Apple"} image={require("../../Assets/Image/AuthStack/SignIn/apple.png")} />
-                </View>
+
             </View>
         </ImageBackground>
     )
@@ -76,9 +131,16 @@ const styles = StyleSheet.create({
     Container: {
         backgroundColor: 'white',
         paddingHorizontal: 20,
-        marginTop: "16%",
+        marginTop: "45%",
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25,
+    },
+
+    ButtonContainer: {
+        marginHorizontal: 20,
+        rowGap: 10,
+        marginTop: '160%'
+
     },
 
     Row1: {

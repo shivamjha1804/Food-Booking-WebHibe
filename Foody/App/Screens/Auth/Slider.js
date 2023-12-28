@@ -3,6 +3,7 @@ import { Image, StyleSheet, Text, View } from 'react-native'
 import Swiper from 'react-native-swiper'
 import Button from '../../Components/CommonComponents/Button/Button';
 import { useNavigation } from '@react-navigation/native';
+import NavigationService from '../../Services/Navigation';
 
 const Data = [
   {
@@ -19,7 +20,6 @@ const Data = [
 ]
 
 const Slider = () => {
-  const navigation = useNavigation();
   return (
     <View style={styles.Container}>
       <View style={styles.Row1}>
@@ -42,9 +42,11 @@ const Slider = () => {
 
       </View>
       <View style={styles.Row3}>
-        <Button onPress={() => {
-          navigation.navigate("SignIn")
-        }} buttonColor={'#FE724C'} text={"Get Started"}/>
+        <Button 
+          onPress={() => {
+            NavigationService.navigate("SignIn")
+          }} 
+          buttonColor={'#FE724C'} text={"Get Started"}/>
       </View>
     </View>
   )

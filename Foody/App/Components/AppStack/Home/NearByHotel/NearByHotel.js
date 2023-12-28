@@ -2,6 +2,8 @@ import React from 'react'
 import { ScrollView } from 'react-native'
 import { Image, StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 import Card from './Card'
+import { useNavigation } from '@react-navigation/native'
+import NavigationService from '../../../../Services/Navigation'
 
 const CardDetail = [
     {
@@ -77,7 +79,13 @@ const NearByHotel = () => {
                     {
                         CardDetail.map((item, index) => {
                             return(
-                                <Card item={item} key={index}/>
+                                <Card 
+                                    item={item} 
+                                    key={index}
+                                    onPress={() => {
+                                        NavigationService.navigate("FoodDetail")
+                                    }} 
+                                />
                             )
                         })
                     }
