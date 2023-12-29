@@ -1,7 +1,7 @@
 import React from 'react'
 import { SafeAreaView, StyleSheet, Text, View } from 'react-native'
 
-const Tag = () => {
+const Tag = ( {items} ) => {
   return (
     <SafeAreaView>
         <View
@@ -10,7 +10,7 @@ const Tag = () => {
             <Text 
                 style={styles.Text}
             >
-                Chicken
+                {items.TagName}
             </Text>
         </View>
     </SafeAreaView>
@@ -19,11 +19,11 @@ const Tag = () => {
 
 const styles =StyleSheet.create({
     Container:{
-        paddingHorizontal: 20,
+        paddingHorizontal: 25,
         paddingVertical: 5,
         backgroundColor:'#e5e4e2',
         borderRadius: 15,
-        marginLeft: 10
+        marginHorizontal: 2
     },
 
     Text:{

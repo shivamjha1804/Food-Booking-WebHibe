@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import Home from '../Screens/App/Home';
 import ButtomNavigator from './ButtomNavigator';
 import FoodDetail from '../Screens/App/FoodDetails/FoodDetail';
+import Cart from '../Screens/App/Cart/Cart';
 
 const Stack = createStackNavigator();
 
@@ -25,6 +26,11 @@ const AppStack = () => {
       <Stack.Screen 
         name="FoodDetail" 
         component={FoodDetail} 
+      />
+
+      <Stack.Screen 
+        name="Cart" 
+        component={Cart} 
       />
       
     </Stack.Navigator>

@@ -23,22 +23,44 @@ const Header = (props) => {
                     />
                 </View>
             </TouchableOpacity>
-            <TouchableOpacity
-                onPress={() => {
-                    if(props.onPress){
-                        props.onPress()
-                    }
+            <View
+                style={{
+                    flexDirection: 'row',
+                    columnGap: 10,
+                    alignItems: 'center'
                 }}
             >
-                <View
+                <TouchableOpacity
+                    onPress={() => {
+                        if (props.onPress) {
+                            props.onPress()
+                        }
+                    }}
+
+                    style={
+                        styles.Row2
+                    }
+                >
+                    <Icon
+                        name='shoppingcart'
+                        type='AntDesign'
+                    />
+                </TouchableOpacity>
+                <TouchableOpacity
+                    onPress={() => {
+                        if (props.onPress1) {
+                            props.onPress1()
+                        }
+                    }}
+
                     style={styles.Row2}
                 >
                     <Icon
                         name='dots-three-vertical'
                         type='Entypo'
                     />
-                </View>
-            </TouchableOpacity>
+                </TouchableOpacity>
+            </View>
         </View>
     )
 }
